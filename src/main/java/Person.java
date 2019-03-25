@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Person implements Comparable<Person> {
     private String name;
     private int age;
@@ -55,5 +57,22 @@ public class Person implements Comparable<Person> {
         if(result == 0)
             result = this.age - other.age;
         return result;
+    }
+    //equals method
+    //if you have a equals method, you must also have a hashcode method.
+    //hashcodes are an object's id in the form of a single number.
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &&
+                Objects.equals(name, person.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
     }
 }
